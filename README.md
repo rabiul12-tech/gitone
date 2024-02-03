@@ -68,10 +68,10 @@ so it is very usefull
 
 
 # React package install
-<details> 
- <summary>
-  package
- </summary>
+     <details> 
+    <summary>
+     package
+     </summary>
        ```javascript
        1.react install 
        npx create-react-app my-app
@@ -133,4 +133,9 @@ so it is very usefull
        so it is very usefull 
        
        ```
-</details>
+   </details>
+
+
+
+#
+
