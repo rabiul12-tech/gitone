@@ -1,5 +1,8 @@
 # React package install
-
+<details> 
+ <summary>
+  package
+ </summary>
 ```javascript
 1.react install 
 npx create-react-app my-app
@@ -61,3 +64,4 @@ for something  querry   it is a new package
 so it is very usefull 
 
 ```
+</details>
