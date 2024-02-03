@@ -3,7 +3,7 @@
  <summary>
   package
  </summary>
-```javascript
+
 1.react install 
 npx create-react-app my-app
 cd my-app
@@ -62,7 +62,6 @@ npm i axios
 "@tanstack/react-query": "^5", 
 for something  querry   it is a new package 
 so it is very usefull 
-```
 </details>
 
 
