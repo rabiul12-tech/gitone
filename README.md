@@ -62,7 +62,6 @@ npm i axios
 "@tanstack/react-query": "^5", 
 for something  querry   it is a new package 
 so it is very usefull 
-
 ```
 </details>
 
