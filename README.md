@@ -3222,26 +3222,84 @@ export default Users;
 
 <br>
 
+# useRef Hooks 
 <details>
       <summary>
-   Hello
+  UserForm
      </summary>
 
 ```javascript
-import React from "react";
+import React, { useRef } from "react";
 
-const Expensive = () => {
-  console.log("expensive compenent rendered!");
+const UserForm = () => {
+  let userNameRef = useRef();
+  let passwordRef = useRef();
 
-  let total = 0;
-  for (let i = 0; i < 1000000000; i++) {
-    total += i;
-  }
+  let handleSubmit = (e) => {
+    e.preventDefault();
 
-  return <div>Expensive</div>;
+    let us = userNameRef.current.value;
+    let pass = passwordRef.current.value;
+    console.log({ us, pass });
+  };
+  return (
+    <div>
+      <h1> UserForm </h1>
+
+      <form action="" onSubmit={handleSubmit}>
+        <div className="form-field">
+          <label htmlFor="userName">UserName :</label>
+          <input type="text" id="userName" ref={userNameRef} />
+        </div>
+
+        <div className="form-field">
+          <label htmlFor="password">Password :</label>
+          <input type="password" id="password" ref={passwordRef} />
+        </div>
+        <button type="submit">Registerd </button>
+      </form>
+    </div>
+  );
 };
 
-export default Expensive;
+export default UserForm;
+
+```
+
+</details>
+<br>
+<br>
+
+# useEffect Hooks 
+<details>
+      <summary>
+        UseEffectExample
+     </summary>
+
+```javascript
+import React, { useState, useEffect } from "react";
+
+const UseEffectExample = () => {
+  const [count, setcount] = useState(0);
+
+  const [isLoading, setisLoading] = useState(false);
+
+  useEffect(() => {
+    console.log("useEffect ");
+  }, [count]);
+
+  return (
+    <div>
+      {console.log("rendering ")}
+      <h1>Count : {count} </h1>
+      <button onClick={() => setcount((pre) => pre + 1)}>increment </button>
+      <button onClick={() => setisLoading(!isLoading)}>increment </button>
+    </div>
+  );
+};
+
+export default UseEffectExample;
+
 ```
 
 </details>
@@ -3268,75 +3326,147 @@ export default Expensive;
 ```
 
 </details>
+
+<br>
+
+## DataFetch 
 <details>
       <summary>
-        hello
+        DataFetch 
      </summary>
 
 ```javascript
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Expensive = () => {
-  console.log("expensive compenent rendered!");
+const DataFetch = () => {
+  const [todos, settodos] = useState(null);
 
-  let total = 0;
-  for (let i = 0; i < 1000000000; i++) {
-    total += i;
-  }
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        settodos(data);
+      });
+  }, []);
 
-  return <div>Expensive</div>;
+  let todoElement =
+    todos &&
+    todos.map((todo) => {
+      return <p key={todo.id}>{todo.title}</p>;
+    });
+
+  return (
+    <div>
+      <h1> DataFetch</h1>
+      {todoElement}
+    </div>
+  );
 };
 
-export default Expensive;
+export default DataFetch;
+
 ```
 
 </details>
+<br>
+
+## part2 
 <details>
       <summary>
-        hello
+      DataFetch  ErrorHandling
      </summary>
 
 ```javascript
-import React from "react";
+import React, { useEffect, useState } from "react";
+const loadingMessage = <p>todo is loading </p>;
 
-const Expensive = () => {
-  console.log("expensive compenent rendered!");
+const DataFetch = () => {
+  const [todos, settodos] = useState(null);
 
-  let total = 0;
-  for (let i = 0; i < 1000000000; i++) {
-    total += i;
-  }
+  const [loading, setloading] = useState(true);
 
-  return <div>Expensive</div>;
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todos")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        settodos(data);
+        setloading(false);
+      });
+  }, []);
+
+  let todoElement =
+    todos &&
+    todos.map((todo) => {
+      return <p key={todo.id}>{todo.title}</p>;
+    });
+
+  return (
+    <div>
+      <h1> DataFetch</h1>
+      {loading && loadingMessage}
+      {todoElement}
+    </div>
+  );
 };
 
-export default Expensive;
+export default DataFetch;
+
+
+import React, { useEffect, useState } from "react";
+const loadingMessage = <p>todo is loading </p>;
+const ErrorHandling = () => {
+  const [todos, settodos] = useState(null);
+
+  const [loading, setloading] = useState(true);
+  const [error, seterror] = useState(null);
+
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/todo")
+      .then((response) => {
+        if (!response.ok) {
+          throw Error("Fetching is not successful ");
+        } else {
+          return response.json();
+        }
+      })
+      .then((data) => {
+        settodos(data);
+        setloading(false);
+        seterror(false);
+      })
+      .catch((error) => {
+        seterror(error.message);
+        setloading(false);
+      });
+  }, []);
+
+  let todoElement =
+    todos &&
+    todos.map((todo) => {
+      return <p key={todo.id}>{todo.title}</p>;
+    });
+
+  return (
+    <div>
+      <h1> DataFetch</h1>
+      {error && <p> {error} </p>}
+      {loading && loadingMessage}
+      {todoElement}
+    </div>
+  );
+};
+
+export default ErrorHandling;
+
 ```
 
 </details>
-<details>
-      <summary>
-        hello
-     </summary>
 
-```javascript
-import React from "react";
-
-const Expensive = () => {
-  console.log("expensive compenent rendered!");
-
-  let total = 0;
-  for (let i = 0; i < 1000000000; i++) {
-    total += i;
-  }
-
-  return <div>Expensive</div>;
-};
-
-export default Expensive;
-```
-
-</details>
+<br> 
 <details>
       <summary>
         hello
