@@ -4,7 +4,11 @@ Link : https://github.com/safak/next-blog
 
 # to install command  line 
 # always use this command 
+
+```js 
 git clone --single-branch -b starter https://github.com/safak/next-blog.git .
+```
+
 
 
 
