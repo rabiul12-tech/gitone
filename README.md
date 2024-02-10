@@ -1,3 +1,10 @@
+# 1.nextapp install 
+
+Link : https://github.com/safak/next-blog
+# to install command  
+git clone --single-branch -b starter https://github.com/safak/next-blog.git
+
+
 # 6 React documentation
 
 1. react install
